@@ -20,3 +20,7 @@ vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>a", opts)
 
 -- Quit Neovim with Ctrl+Q in normal mode
 vim.api.nvim_set_keymap("n", "<C-q>", ":q<CR>", opts)
+
+-- Copy to clipboard
+vim.api.nvim_set_option("clipboard", "unnamedplus")
+
