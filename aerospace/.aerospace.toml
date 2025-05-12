@@ -140,26 +140,24 @@ alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
+alt-1 = 'workspace 1-Browsing'
+alt-2 = 'workspace 2-Media'
+alt-3 = 'workspace 3-Chats'
+alt-4 = 'workspace 4-Code'
+alt-5 = 'workspace 5-Writing'
+alt-6 = 'workspace 6-Mail'
+alt-7 = 'workspace 7-Files'
+alt-8 = 'workspace 8-Bib'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = 'move-node-to-workspace 1'
-alt-shift-2 = 'move-node-to-workspace 2'
-alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-4 = 'move-node-to-workspace 4'
-alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7'
-alt-shift-8 = 'move-node-to-workspace 8'
-alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-1 = 'move-node-to-workspace 1-Browsing'
+alt-shift-2 = 'move-node-to-workspace 2-Media'
+alt-shift-3 = 'move-node-to-workspace 3-Chats'
+alt-shift-4 = 'move-node-to-workspace 4-Code'
+alt-shift-5 = 'move-node-to-workspace 5-Writing'
+alt-shift-6 = 'move-node-to-workspace 6-Mail'
+alt-shift-7 = 'move-node-to-workspace 7-Files'
+alt-shift-8 = 'move-node-to-workspace 8-Bib'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-shift-d = 'move-workspace-to-monitor --wrap-around next' # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitoralt-tab = ['workspace-back-and-forth']
@@ -193,106 +191,112 @@ shift-down = ['volume set 0', 'mode main']
 ## Workspace 1 / Browsing
 [[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
-run = ['move-node-to-workspace 1']
+run = ['move-node-to-workspace 1-Browsing']
 
 [[on-window-detected]]
 if.app-id = 'com.vivaldi.Vivaldi'
-run = ['move-node-to-workspace 1']
+run = ['move-node-to-workspace 1-Browsing']
 
 ## Workspace 2 / Media
 [[on-window-detected]]
 if.app-id = 'com.obsproject.obs-studio'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 2-Media']
 
 [[on-window-detected]]
 if.app-id = 'org.audacityteam.audacity'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 2-Media']
 
 [[on-window-detected]]
 if.app-id = 'com.hindenburg.Hindenburg'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 2-Media']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.audio.AudioMIDISetup'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 2-Media']
 
 [[on-window-detected]]
 if.app-id = 'com.colliderli.iina'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 2-Media']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.FinalCut'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 2-Media']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.FinalCut'
+if.app-name-regex-substring = 'Media Import'
+if.window-title-regex-substring = 'substring'
+run = ['layout floating']
 
 ## Workspace 3 / Chats
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
-run = ['move-node-to-workspace 3']
+run = ['move-node-to-workspace 3-Chats']
 
 [[on-window-detected]]
 if.app-id = 'com.tdesktop.Telegram'
-run = ['move-node-to-workspace 3']
+run = ['move-node-to-workspace 3-Chats']
 
 ## Workspace 4 / Coding
 [[on-window-detected]]
 if.app-id = 'dev.zed.Zed'
-run = ['move-node-to-workspace 4']
+run = ['move-node-to-workspace 4-Code']
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = ['move-node-to-workspace 4']
+run = ['move-node-to-workspace 4-Code']
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-run = ['move-node-to-workspace 4']
+run = ['move-node-to-workspace 4-Code']
 
 ## Workspace 5 / Writing
 [[on-window-detected]]
 if.app-id = 'com.hemingwayapp.editor3'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace 5-Writing']
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace 5-Writing']
 
 [[on-window-detected]]
 if.app-id = 'com.literatureandlatte.scrivener3'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace 5-Writing']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iWork.Pages'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace 5-Writing']
 
 [[on-window-detected]]
 if.app-id = 'com.ulyssesapp.mac'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace 5-Writing']
 
 [[on-window-detected]]
 if.app-id = 'pro.writer.mac'
-run = ['move-node-to-workspace 5']
+run = ['move-node-to-workspace 5-Writing']
 
 ## Workspace 6 / Mail
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
-run = 'move-node-to-workspace 6'
+run = 'move-node-to-workspace 6-Mail'
 
 [[on-window-detected]]
 if.app-id = 'com.protonmail.bridge'
-run = 'move-node-to-workspace 6'
+run = 'move-node-to-workspace 6-Mail'
 
 ## Workspace 7 / File Browsing
 [[on-window-detected]]
 if.app-id = 'com.binarynights.ForkLift'
-run = ['move-node-to-workspace 7']
+run = ['move-node-to-workspace 7-Files']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = ['move-node-to-workspace 7']
+run = ['layout floating']
 
-## Workspace 9 / Zotero
+## Workspace 8 / Zotero
 [[on-window-detected]]
 if.app-id = 'org.zotero.zotero'
-run = ['move-node-to-workspace 9']
+run = ['move-node-to-workspace 8-Bib']
 
 ## Force Floating Windows
 [[on-window-detected]]
@@ -302,17 +306,22 @@ if.window-title-regex-substring = 'substring'
 run = ['layout floating']
 
 [[on-window-detected]]
-if.app-id = ' com.kawauso.LadioCast'
+if.app-id = 'com.kawauso.LadioCast'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.runningwithcrayons.Alfred'
+if.app-name-regex-substring = 'preferences'
+if.window-title-regex-substring = 'substring'
 run = ['layout floating']
 
 # force certain workspaces to certain monitors
 [workspace-to-monitor-force-assignment]
-1 = 'secondary'
-2 = 'secondary'
-3 = 'secondary'
-4 = 'secondary'
-5 = 'secondary'
-6 = 'secondary'
-7 = 'secondary'
-8 = 'main'
-9 = 'main'
+1-Browsing = 'secondary'
+2-Media = 'secondary'
+3-Chats = 'secondary'
+4-Code = 'secondary'
+5-Writing = 'secondary'
+6-Mail = 'secondary'
+7-Files = 'secondary'
+8-Bib = 'main'

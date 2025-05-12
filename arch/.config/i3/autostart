@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#apps
+brave
+thunderbird
+discord
+
+# picom (window transparency)
+picom --config ~/.config/picom/picom.conf
+
+# autotiling 
+autotiling
+
+# feh (background)
+feh --bg-fill --randomize ~/Pictures/Wallpaper/*
