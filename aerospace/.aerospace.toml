@@ -290,7 +290,15 @@ if.app-id = 'com.binarynights.ForkLift'
 run = ['move-node-to-workspace 7-Files']
 
 [[on-window-detected]]
+if.app-id = 'com.noodlesoft.Hazel'
+run = ['move-node-to-workspace 7-Files']
+
+[[on-window-detected]]
 if.app-id = 'com.apple.finder'
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.preview'
 run = ['layout floating']
 
 ## Workspace 8 / Zotero
