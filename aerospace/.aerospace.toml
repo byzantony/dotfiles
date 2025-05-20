@@ -219,6 +219,10 @@ if.app-id = 'com.colliderli.iina'
 run = ['move-node-to-workspace 2-Media']
 
 [[on-window-detected]]
+if.app-id = 'org.cogx.cog'
+run = ['move-node-to-workspace 2-Media']
+
+[[on-window-detected]]
 if.app-id = 'com.apple.FinalCut'
 run = ['move-node-to-workspace 2-Media']
 
@@ -229,10 +233,8 @@ if.window-title-regex-substring = 'substring'
 run = ['layout floating']
 
 [[on-window-detected]]
-if.app-id = 'org.cogx.cog'
-if.app-name-regex-substring = 'Media Import'
-if.window-title-regex-substring = 'substring'
-run = ['layout floating']
+if.app-id = 'org.nicotine_plus.Nicotine'
+run = ['move-node-to-workspace 2-Media']
 
 ## Workspace 3 / Chats
 [[on-window-detected]]
