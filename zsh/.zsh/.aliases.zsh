@@ -35,6 +35,19 @@ alias ga='git add' # Add file changes
 ### Homebrew ###
 alias brew-sync="~/.dotfiles/scripts/sync_brewfile.sh" # Runs Brewfile sync
 
+### Server Admin ###
+alias empire1='ssh root@100.103.69.59' # Tailscale SSH login
+alias empire2='ssh root@empire.trex-scala.ts.net' # Tailscale SSH login custom DNS
+alias empire3='ssh root@empire.local' # Local SSH without Tailscale
+alias empiremedia='root@100.103.69.59/mnt/user/media' # Tailscale location of media on cache drive
+alias empiredata='root@100.103.69.59/mnt/user/data' # Tailscale location of data on cache drive
+
+### Networking ###
+alias flushdns='sudo killall -HUP mDNSResponder'
+
+### rsync ###
+alias sync='rsync -avh --delete --progress'
+
 ### Terminal programs ###
 alias nb='newsboat' # Open RSS reader
 alias n='nvim' # Open file or folder in Neovim

@@ -301,9 +301,13 @@ run = ['layout floating']
 if.app-id = 'com.apple.preview'
 run = ['layout floating']
 
-## Workspace 8 / Zotero
+## Workspace 8 / Bibliography
 [[on-window-detected]]
 if.app-id = 'org.zotero.zotero'
+run = ['move-node-to-workspace 8-Bib']
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.calibre'
 run = ['move-node-to-workspace 8-Bib']
 
 ## Force Floating Windows
