@@ -228,6 +228,12 @@ if.app-name-regex-substring = 'Media Import'
 if.window-title-regex-substring = 'substring'
 run = ['layout floating']
 
+[[on-window-detected]]
+if.app-id = 'org.cogx.cog'
+if.app-name-regex-substring = 'Media Import'
+if.window-title-regex-substring = 'substring'
+run = ['layout floating']
+
 ## Workspace 3 / Chats
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
