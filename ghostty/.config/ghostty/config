@@ -1,8 +1,0 @@
-font-family = JetBrains Mono Nerd Font
-font-size = 16
-macos-titlebar-style = transparent
-window-colorspace = "display-p3"
-window-decoration = true
-#background-blur = macos-glass-regular
-
-theme = vercel-dark
