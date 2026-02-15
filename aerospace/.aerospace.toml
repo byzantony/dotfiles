@@ -68,7 +68,7 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-outer.top = 45
+outer.top = 5
 outer.right = 10
 
 # 'main' binding mode declaration
@@ -148,6 +148,8 @@ alt-5 = 'workspace 5-Writing'
 alt-6 = 'workspace 6-Mail'
 alt-7 = 'workspace 7-Files'
 alt-8 = 'workspace 8-Bib'
+alt-9 = 'workspace 9-Share'
+alt-0 = 'workspace 0-Misc'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1-Browsing'
@@ -158,6 +160,8 @@ alt-shift-5 = 'move-node-to-workspace 5-Writing'
 alt-shift-6 = 'move-node-to-workspace 6-Mail'
 alt-shift-7 = 'move-node-to-workspace 7-Files'
 alt-shift-8 = 'move-node-to-workspace 8-Bib'
+alt-shift-9 = 'move-node-to-workspace 9-Share'
+alt-shift-0 = 'move-node-to-workspace 0-Misc'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-shift-d = 'move-workspace-to-monitor --wrap-around next' # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitoralt-tab = ['workspace-back-and-forth']
@@ -195,6 +199,10 @@ run = ['move-node-to-workspace 1-Browsing']
 
 [[on-window-detected]]
 if.app-id = 'com.vivaldi.Vivaldi'
+run = ['move-node-to-workspace 1-Browsing']
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
 run = ['move-node-to-workspace 1-Browsing']
 
 ## Workspace 2 / Media
@@ -318,6 +326,12 @@ run = ['move-node-to-workspace 8-Bib']
 if.app-id = 'net.kovidgoyal.calibre'
 run = ['move-node-to-workspace 8-Bib']
 
+## Workspace 9 / Share
+[[on-window-detected]]
+if.app-id = 'com.apple.ScreenSharing'
+run = ['move-node-to-workspace 9-Share']
+
+
 ## Force Floating Windows
 [[on-window-detected]]
 if.app-id = 'com.apple.systempreferences'
@@ -339,9 +353,11 @@ run = ['layout floating']
 [workspace-to-monitor-force-assignment]
 1-Browsing = 'secondary'
 2-Media = 'secondary'
-3-Chats = 'secondary'
+3-Chats = 'main'
 4-Code = 'secondary'
 5-Writing = 'secondary'
-6-Mail = 'secondary'
-7-Files = 'secondary'
-8-Bib = 'main'
+6-Mail = 'main'
+7-Files = 'main'
+8-Bib = 'secondary'
+9-Share = 'secondary'
+0-Misc = 'secondary'

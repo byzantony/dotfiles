@@ -13,6 +13,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Enable Starship
+eval "$(starship init zsh)"
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
@@ -96,3 +99,4 @@ eval "$(zoxide init --cmd cd zsh)"
 
 # Created by `pipx` on 2025-05-17 21:32:34
 export PATH="$PATH:/Users/tsarbook/.local/bin"
+export PATH="$HOME/.cargo/bin:$PATH"
