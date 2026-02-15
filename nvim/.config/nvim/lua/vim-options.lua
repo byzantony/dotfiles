@@ -24,3 +24,6 @@ vim.api.nvim_set_keymap("n", "<C-q>", ":q<CR>", opts)
 -- Copy to clipboard
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 
+vim.keymap.set("n", "<leader>th", function()
+  require("themery").ui()
+end, { desc = "Toggle themery" })

@@ -1,8 +1,8 @@
 ### dotfile configs ###
 alias zconfig='nvim ~/.dotfiles/zsh/.zshrc' # Edit .zshrc in Neovim
 alias zconfigcode='zed ~/.dotfiles/zsh/.zshrc' # Edit .zshrc in Zed
-alias nvimconfig='nvim ~/.dotfiles/nvim/init.lua' # Edit init.lua in Neovim
-alias wezconfig='nvim ~/.dotfiles/wezterm/.wezterm.lua' # Edit .wezterm.lua
+alias nvimconfig='nvim ~/.dotfiles/nvim/.config/nvim/init.lua' # Edit init.lua in Neovim
+alias wezconfig='nvim ~/.dotfiles/wezterm/.config/wezterm/wezterm.lua' # Edit .wezterm.lua
 alias zsource='source ~/.dotfiles/zsh/.zshrc' # Refresh .zshrc
 alias aliases='nvim ~/.dotfiles/zsh/.zsh/.aliases.zsh' # Edit ZSH aliases
 alias dotfiles='nvim ~/.dotfiles' # Open dotfiles directory in Neovim
@@ -31,6 +31,7 @@ alias gac='git add . && git commit' # Add all changes and commit
 alias gch='git checkout' # Checkout branch
 alias gpom='git pull origin master' # Pull from master branch
 alias ga='git add' # Add file changes
+alias gitdot='git add ~/.dotfiles .' # Add all dotfiles
 
 ### Homebrew ###
 alias brew-sync="~/.dotfiles/scripts/sync_brewfile.sh" # Runs Brewfile sync
