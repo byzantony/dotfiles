@@ -12,10 +12,10 @@ return {
           { name = "Gruvbox",      colorscheme = "gruvbox" },
           { name = "Nord",         colorscheme = "nord" },
           { name = "Catppuccin",   colorscheme = "catppuccin-mocha" },
-          { name = "Kanagawa",     colorscheme = "kanagawa-dragon" },
-        },
+         },
         livePreview = true,
       })
+
     end,
   },
   { "tiagovla/tokyodark.nvim" },
