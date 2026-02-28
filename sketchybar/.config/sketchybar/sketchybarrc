@@ -1,5 +1,164 @@
-#!/usr/bin/env lua
+#!/opt/homebrew/bin/bash
+# ============================================================
+# SketchyBar Configuration
+# Docs: https://felixkratz.github.io/SketchyBar/config/bar
+# ============================================================
 
--- Load the sketchybar-package and prepare the helper binaries
-require("helpers")
-require("init")
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+# Full path to AeroSpace — bare 'aerospace' won't be found at login
+# because SketchyBar launches before Homebrew's /opt/homebrew/bin
+# is added to $PATH
+AEROSPACE=/opt/homebrew/bin/aerospace
+
+source "$CONFIG_DIR/colors.sh"
+
+
+# ────────────────────────────────────────────────────────────
+# BAR APPEARANCE
+# ────────────────────────────────────────────────────────────
+
+sketchybar --bar position=top height=36 blur_radius=30 color=$BAR_COLOR
+
+
+# ────────────────────────────────────────────────────────────
+# GLOBAL DEFAULTS
+# Applied to every item unless overridden
+# ────────────────────────────────────────────────────────────
+
+default=(
+  padding_left=0
+  padding_right=0
+  icon.font="Hack Nerd Font:Regular:14.0"
+  label.font="SF Pro:Semibold:14.0"
+  icon.color=$DEFAULT_ICON_COLOR
+  label.color=$DEFAULT_LABEL_COLOR
+  icon.padding_left=10
+  icon.padding_right=10
+  label.padding_left=0
+  label.padding_right=10
+  background.padding_left=4
+  background.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+
+# ────────────────────────────────────────────────────────────
+# CUSTOM EVENTS
+# AeroSpace fires these on workspace and mode changes
+# ────────────────────────────────────────────────────────────
+
+sketchybar --add event aerospace_workspace_change
+sketchybar --add event aerospace_mode_changed
+
+
+# ────────────────────────────────────────────────────────────
+# WORKSPACE BUTTONS (left side)
+#
+# Each button shows:
+#   icon  — the workspace number (1–9, 0 for the 10th)
+#   label — app icons for windows open there, populated by
+#            plugins/aerospace.sh using sketchybar-app-font
+#
+# The label starts hidden (label.drawing=off) and is turned on
+# by aerospace.sh only when that workspace has open windows.
+#
+# Requires: brew install --cask font-sketchybar-app-font
+# ────────────────────────────────────────────────────────────
+
+for sid in $($AEROSPACE list-workspaces --all); do
+  # Strip everything after the first hyphen: "1-Browsing" → "1"
+  space_num="${sid%%-*}"
+
+  sketchybar --add item "space.$sid" left \
+    --subscribe "space.$sid" aerospace_workspace_change \
+    --set "space.$sid" \
+      background.color=$TRANSPARENT \
+      background.corner_radius=5 \
+      background.height=25 \
+      background.drawing=off \
+      background.padding_left=6 \
+      background.padding_right=6 \
+      y_offset=1 \
+      icon="$space_num" \
+      icon.font="SF Pro:Bold:14.0" \
+      icon.highlight_color=$SPACE_HIGHLIGHT_COLOR \
+      label.drawing=off \
+      label.font="sketchybar-app-font:Regular:14.0" \
+      label.padding_left=4 \
+      label.y_offset=-1 \
+      click_script="$AEROSPACE workspace $sid" \
+      script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+done
+
+
+# ────────────────────────────────────────────────────────────
+# LEFT SIDE ITEMS
+# ────────────────────────────────────────────────────────────
+
+sketchybar \
+  --add item chevron left \
+  --set chevron icon= label.drawing=off \
+  \
+  --add item front_app left \
+  --set front_app icon.drawing=off label.drawing=on script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app front_app_switched \
+  \
+  --add item front_app_layout left \
+  --set front_app_layout \
+    icon.drawing=on \
+    icon.font="Hack Nerd Font:Regular:11.0" \
+    icon.color=$FRONT_APP_LAYOUT_ICON_COLOR \
+    icon.padding_left=6 \
+    icon.padding_right=6 \
+    label.drawing=off \
+    background.drawing=on \
+    background.color=$FRONT_APP_LAYOUT_BG_COLOR \
+    background.corner_radius=4 \
+    background.height=16 \
+    script="$PLUGIN_DIR/front_app.sh" \
+  --subscribe front_app_layout front_app_switched aerospace_mode_changed
+
+
+# ────────────────────────────────────────────────────────────
+# RIGHT SIDE ITEMS
+# ────────────────────────────────────────────────────────────
+
+sketchybar \
+  --add item clock right \
+  --set clock \
+    update_freq=10 \
+    icon= \
+    script="$PLUGIN_DIR/clock.sh" \
+  \
+  --add item battery right \
+  --set battery \
+    update_freq=60 \
+    icon.drawing=on \
+    icon.font="Hack Nerd Font:Regular:16.0" \
+    icon.padding_left=8 \
+    icon.padding_right=4 \
+    icon.color=$BATTERY_COLOR_NORMAL \
+    label.padding_right=8 \
+    script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change \
+  \
+  --add item calendar_event right \
+  --set calendar_event \
+    update_freq=60 \
+    script="$PLUGIN_DIR/calendar_event.sh" \
+    click_script="open -a Calendar" \
+    icon.font="Hack Nerd Font:Regular:14.0" \
+    label.color=$CAL_EVENT_LABEL_COLOR \
+    background.drawing=on \
+    background.color=$CAL_EVENT_BG_COLOR \
+    background.corner_radius=8 \
+    background.height=25
+
+
+# ────────────────────────────────────────────────────────────
+# INITIAL RENDER
+# Force all scripts to run once at startup so nothing is blank
+# ────────────────────────────────────────────────────────────
+
+sketchybar --update
