@@ -1,0 +1,6 @@
+# Doom Emacs ignores
+.local/
+*.elc
+*~
+.#*
+.DS_Store

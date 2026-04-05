@@ -1,0 +1,168 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: #e0e0e0;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: rgba(10, 10, 10, 0.95);
+    border-radius: 12px;
+    margin: 6px 4px;
+    padding: 0 12px;
+    border: 1px solid rgba(80, 80, 80, 0.3);
+}
+
+#workspaces {
+    margin: 0;
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 2px 8px;
+    color: #888888;
+    background: transparent;
+    border-radius: 6px;
+    margin: 4px 2px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    color: #e0e0e0;
+    background: rgba(200, 200, 200, 0.12);
+}
+
+#workspaces button:hover {
+    background: rgba(200, 200, 200, 0.08);
+    color: #aaaaaa;
+}
+
+#workspaces button.urgent {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#window {
+    color: #999999;
+    padding: 0 8px;
+    font-style: italic;
+}
+
+#clock {
+    color: #e0e0e0;
+    font-weight: bold;
+    padding: 0 12px;
+}
+
+#cpu {
+    color: #cccccc;
+    padding: 0 8px;
+}
+
+#memory {
+    color: #cccccc;
+    padding: 0 8px;
+}
+
+#cpu.warning,
+#memory.warning {
+    color: #cccccc;
+}
+
+#cpu.critical,
+#memory.critical {
+    color: #ffffff;
+}
+
+#pulseaudio {
+    color: #aaaaaa;
+    padding: 0 8px;
+}
+
+#pulseaudio.muted {
+    color: #444444;
+}
+
+#mpris {
+    color: #cccccc;
+    font-size: 11px;
+    padding: 0 8px;
+}
+
+#network {
+    padding: 0 8px;
+    color: #cccccc;
+}
+
+#network.disconnected {
+    color: #555555;
+}
+
+#custom-tailscale {
+    padding: 0 8px;
+}
+
+#custom-tailscale.vpn {
+    color: #e0e0e0;
+}
+
+#custom-tailscale.lan {
+    color: #aaaaaa;
+}
+
+#custom-tailscale.off {
+    color: #444444;
+}
+
+#custom-cava {
+    color: #999999;
+    padding: 0 8px;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+
+#tray {
+    padding: 0 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    color: #ffffff;
+}
+
+#custom-swaync {
+    color: #cccccc;
+    padding: 0 8px;
+}
+
+#custom-swaync.notification {
+    color: #e0e0e0;
+}
+
+#custom-swaync.dnd-notification,
+#custom-swaync.dnd-none {
+    color: #444444;
+}
+
+tooltip {
+    background: rgba(10, 10, 10, 0.98);
+    border: 1px solid rgba(80, 80, 80, 0.4);
+    border-radius: 8px;
+    color: #e0e0e0;
+}
+
+tooltip label {
+    color: #e0e0e0;
+}

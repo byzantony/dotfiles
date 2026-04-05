@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Syncthing
+Comment=Start Syncthing in background
+Exec=/usr/bin/syncthing serve --no-browser --no-restart --logflags=0
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=5

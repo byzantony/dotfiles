@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=WirePlumber
+Exec=wireplumber
+Hidden=false
+X-GNOME-Autostart-enabled=true

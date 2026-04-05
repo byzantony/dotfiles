@@ -1,0 +1,288 @@
+[
+  /////////////////////////////////
+ ////   PRIMARY MONITOR BAR   ////
+/////////////////////////////////
+{
+    "layer": "top",
+    "position": "top",
+    "output": "HDMI-A-1",
+    "height": 36,
+    "spacing": 4,
+    "margin-top": 6,
+    "margin-left": 12,
+    "margin-right": 12,
+
+    "modules-left": [
+        "hyprland/workspaces", // workspace switcher
+        "custom/cava",          // sound waves
+        "mpris"
+    ],
+
+    "modules-center": [
+        "hyprland/window"      // active window title
+    ],
+
+    "modules-right": [
+        "cpu",
+        "memory",
+        "pulseaudio",
+        "network",
+        "custom/tailscale",
+        "tray",
+        "custom/swaync",
+        "clock"
+    ],
+
+    // WORKSPACES & APP ICONS
+    "hyprland/workspaces": {
+        "format": "{icon} {windows}",
+        "format-window-separator": " ",
+        "window-rewrite-default": "",
+        "window-rewrite": {
+            "class<kitty>": "󰆍",
+            "class<brave-browser>": "󰖟",
+            "class<thunar>": "󰉋",
+            "class<obs>": "󰑋",
+            "class<obsidian>": "󱓧",
+            "class<zotero>": "󰂺",
+            "class<org.keepassxc.KeePassXC>": "󰌋",
+            "class<brave-dpailibpbgpnbhaiikoggbmkncmchnea-Default>": "󰙯",
+            "class<Gajim>": "󰍡",
+            "class<Emacs>": "𝓔",
+            "class<thunderbird>": "",
+            "class<brave-jnpecgipniidlgicjocehkhajgdnjekh-Default>": "",
+            "class<brave-ojibjkjikcpjonjjngfkegflhmffeemk-Default>": "",
+            "class<yazi>": "󰉋",
+            "class<pavucontrol>": "󰕾",
+            "class<btop>": "󰓅",
+            "title<.*YouTube.*>": "󰗃",
+            "title<.*GitHub.*>": "󰊤"
+        },
+        "on-click": "activate",
+        "sort-by-number": true
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50,
+        "separate-outputs": true
+    },
+
+    "clock": {
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%A, %B %d %Y  %I:%M %p}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "gnome-calendar"
+    },
+
+    "cpu": {
+        "format": "󰘚 {usage}%",
+        "tooltip": true,
+        "interval": 2,
+        "on-click": "kitty -e btop"
+    },
+
+    "memory": {
+        "format": "󰍛 {percentage}%",
+        "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB",
+        "interval": 2,
+        "on-click": "kitty -e btop"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 Muted",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "scroll-step": 5
+    },
+
+    "custom/waybar-mpris": {
+        "return-type": "json",
+        "exec": "waybar-mpris --autofocus --position",
+        "on-click": "waybar-mpris --send toggle",
+        "on-click-right": "waybar-mpris --send player-next",
+        "on-scroll-up": "waybar-mpris --send next",
+        "on-scroll-down": "waybar-mpris --send prev",
+        "escape": true
+    },
+
+    "mpris": {
+        "format": "{player_icon} {title} — {artist}",
+        "format-paused": "{status_icon} {title} — {artist}",
+        "player-icons": {
+            "default": "▶",
+            "mpv": "🎵",
+            "brave": "󰖟",
+            "firefox": "󰈹"
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+        "max-length": 40,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous",
+        "tooltip-format": "{title}\n{artist}\n{album}"
+    },
+
+// Play button only, no title
+    // "mpris": {
+    //     "format": "{player_icon} {dynamic}",
+    //     "format-paused": "{status_icon} {dynamic}",
+    //     "dynamic-order": ["title", "artist"],
+    //     "dynamic-len": 30,
+    //     "dynamic-separator": " — ",
+    //     "player-icons": {
+    //         "default": "▶",
+    //         "mpv": "▶",
+    //         "brave": "▶",
+    //         "firefox": "▶"
+    // },
+    // "status-icons": {
+    //     "paused": "⏸"
+    // },
+    //     "max-length": 40,
+    //     "on-click": "playerctl play-pause",
+    //     "on-click-right": "playerctl next",
+    //     "on-click-middle": "playerctl previous",
+    //     "tooltip-format": "{title}\n{artist}\n{album}"
+    // },
+    //
+    "network": {
+        "interface": "eth0",
+        "format-wifi": "<span color='#a6e3a1'>󰤨</span>",
+        "format-ethernet": "<span color='#a6e3a1'>󰈀</span>",
+        "format-disconnected": "<span color='#f38ba8'>󰤭</span>",
+        "format-linked": "<span color='#a6e3a1'>󰈀</span>",
+        "tooltip-format-wifi": "{essid} {signalStrength}%\n{ipaddr}",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "tooltip-format-linked": "{ifname} - No internet (Tailscale active)",
+        "on-click": "kitty -e nmtui"
+    },
+
+    "custom/tailscale": {
+        "exec": "~/.config/waybar/scripts/tailscale.sh",
+        "interval": 5,
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "vpn": "󰖂",
+            "lan": "󰈀",
+            "off": "󰖪"
+        },
+        "on-click": "~/.config/waybar/scripts/tailscale-menu.sh"
+    },
+
+    // AUDIO WAVES
+    "custom/cava": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/cava.sh",
+        "escape": true
+    },
+
+    "tray": {
+        "spacing": 10,
+        "icon-size": 16
+    },
+
+    "custom/swaync": {
+        "exec": "swaync-client -swb",
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰂛",
+            "inhibited-notification": "󰂚",
+            "inhibited-none": "󰂜",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰂛"
+        },
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+},
+
+  /////////////////////////////////
+ //// SECONDARY MONITOR BAR   ////
+/////////////////////////////////
+
+{
+    "layer": "top",
+    "position": "top",
+    "output": "DVI-D-1",
+    "height": 30,
+    "margin-top": 6,
+    "margin-left": 6,
+    "margin-right": 6,
+
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+
+    "modules-center": [
+        "hyprland/window"      // active window title
+    ],
+
+    "modules-right": [
+        "custom/swaync",
+        "tray",
+        "clock"
+    ],
+
+    // WORKSPACES & APP ICONS
+    "hyprland/workspaces": {
+        "format": "{icon} {windows}",
+        "format-window-separator": " ",
+        "window-rewrite-default": "",
+        "window-rewrite": {
+            "class<kitty>": "󰆍",
+            "class<brave-browser>": "󰖟",
+            "class<thunar>": "󰉋",
+            "class<obs>": "󰑋",
+            "class<obsidian>": "󱓧",
+            "class<zotero>": "󰂺",
+            "class<org.keepassxc.KeePassXC>": "󰌋",
+            "class<brave-dpailibpbgpnbhaiikoggbmkncmchnea-Default>": "󰙯",
+            "class<nvim>": "",
+            "class<kate>": "󰴒",
+            "class<yazi>": "󰉋",
+            "title<.*YouTube.*>": "󰗃",
+            "title<.*GitHub.*>": "󰊤",
+            "title<.*Gmail.*>": "󰊫"
+        },
+        "on-click": "activate",
+        "sort-by-number": true
+    },
+
+    "clock": {
+        "format": "{:%I:%M %p}"
+    },
+
+    "custom/swaync": {
+        "exec": "swaync-client -swb",
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰂛"
+        },
+        "on-click": "swaync-client -t -sw",
+        "escape": true
+    },
+
+    "tray": {
+        "spacing": 10,
+        "icon-size": 16
+    }
+}
+]

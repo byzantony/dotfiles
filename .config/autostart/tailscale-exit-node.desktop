@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Tailscale Exit Node
+Comment=Connect to gluetunvpn exit node on login
+Exec=bash -c "sleep 5 && tailscale up --exit-node=gluetunvpn --accept-routes --reset"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true

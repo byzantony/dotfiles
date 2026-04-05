@@ -1,0 +1,138 @@
+/*******************************************************************************
+ * ROFI Color theme
+ * User: Avasz (modified for monochrome)
+ *******************************************************************************/
+* {
+    background-color:           #0F1212;
+    text-color:                 #d3d7cf;
+    selbg:                      #e3e3e3;
+    actbg:                      #e3e3e3;
+    urgbg:                      #e53935;
+    winbg:                      #0F1212;
+
+    selected-normal-foreground: @winbg;
+    normal-foreground:          @text-color;
+    selected-normal-background: @actbg;
+    normal-background:          @background-color;
+
+    selected-urgent-foreground: @background-color;
+    urgent-foreground:          @text-color;
+    selected-urgent-background: @urgbg;
+    urgent-background:          @background-color;
+
+    selected-active-foreground: @winbg;
+    active-foreground:          @winbg;
+    selected-active-background: @actbg;
+    active-background:          @selbg;
+
+    /* Alternate row colors */
+    alternate-normal-background: @background-color;
+    alternate-normal-foreground: @normal-foreground;
+    alternate-urgent-background: @urgent-background;
+    alternate-urgent-foreground: @urgent-foreground;
+    alternate-active-background: @active-background;
+    alternate-active-foreground: @active-foreground;
+
+    separator-style:            none;
+    margin:                     0;
+}
+
+window {
+    background-color:           @background-color;
+    children:                   [mainbox];
+}
+
+mainbox {
+    border:                     0;
+    orientation:                vertical;
+    children:                   [entry, message, listview, mode-switcher];
+}
+
+entry {
+    expand:                     false;
+    text-color:                 @normal-foreground;
+    padding:                    10px 0px 10px 0px;
+    border:                     0 0 1px;
+    border-color:               grey;
+    margin:                     30px 30px 0px 30px;
+}
+
+sidebar {
+    expand:                     false;
+}
+
+textbox {
+    horizontal-align:           0;
+    background-color:           #1a1a1a;
+    padding:                    10px 20px 10px 20px;
+    text-color:                 #d3d7cf;
+}
+
+listview {
+    border:                     0px;
+    border-color:               grey;
+    padding:                    20px 30px 70px 30px;
+}
+
+mode-switcher {
+    margin:                     10px 30px 30px 30px;
+}
+
+button {
+    padding:                    8px;
+}
+
+button selected {
+    background-color:           @selected-normal-background;
+    text-color:                 @selected-normal-foreground;
+}
+
+element {
+    border:                     0;
+    padding:                    10px 20px 10px 20px;
+}
+
+element normal normal {
+    background-color:           @normal-background;
+    text-color:                 @normal-foreground;
+}
+
+element normal urgent {
+    background-color:           @urgent-background;
+    text-color:                 @urgent-foreground;
+}
+
+element normal active {
+    background-color:           @active-background;
+    text-color:                 @active-foreground;
+}
+
+element selected normal {
+    background-color:           @selected-normal-background;
+    text-color:                 @selected-normal-foreground;
+}
+
+element selected urgent {
+    background-color:           @selected-urgent-background;
+    text-color:                 @selected-urgent-foreground;
+}
+
+element selected active {
+    background-color:           @selected-active-background;
+    text-color:                 @selected-active-foreground;
+}
+
+element alternate normal {
+    background-color:           @alternate-normal-background;
+    text-color:                 @alternate-normal-foreground;
+}
+
+element alternate urgent {
+    background-color:           @alternate-urgent-background;
+    text-color:                 @alternate-urgent-foreground;
+}
+
+element alternate active {
+    background-color:           @alternate-active-background;
+    text-color:                 @alternate-active-foreground;
+}

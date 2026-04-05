@@ -1,0 +1,9 @@
+[[mgr.prepend_keymap]]
+on = ["g", "u"]
+run = "cd /mnt/unraid/data"
+desc = "Unraid data"
+
+[[mgr.prepend_keymap]]
+on = ["g", "s"]
+run = "cd /mnt/unraid/isos"
+desc = "Unraid isos"

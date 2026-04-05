@@ -1,0 +1,104 @@
+#+TITLE: Doom Emacs Literate Config
+#+PROPERTY: header-args:emacs-lisp :tangle yes
+#+PROPERTY: header-args :mkdirp yes :comments link
+
+* Personal Information
+
+#+begin_src emacs-lisp
+(setq user-full-name "Anthony"
+      user-mail-address "reversionist@pm.me")
+#+end_src
+
+* Appearance & Fonts
+
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 15 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Crimson Pro" :size 24))
+
+(setq doom-theme 'doom-homage-black)
+
+;; Global line numbers (shown outside Olivetti)
+(setq display-line-numbers-type t)
+#+end_src
+
+* Org Mode
+
+#+begin_src emacs-lisp
+;; Main Org directory
+(setq org-directory "~/Documents/org/")
+
+(after! org
+  ;; Recursive scan: includes ALL .org files in subfolders
+  (setq org-agenda-files
+        (directory-files-recursively org-directory "\\.org$"))
+
+  ;; Manuscript editing helpers
+  (setq org-log-into-drawer t)
+  (setq org-fontify-whole-comment-block t)
+
+  ;; Agenda behavior
+  (setq org-agenda-window-setup 'current-window)
+
+  ;; Better leader keys (avoid conflict with Doom defaults)
+  (map! :leader
+        :desc "Org agenda dispatcher" "o a" #'org-agenda
+        :desc "Org TODO list"         "o t" (lambda () (interactive) (org-agenda nil "t"))))
+#+end_src
+
+* Olivetti Mode
+
+#+begin_src emacs-lisp
+(after! olivetti
+  (defun my/olivetti-setup ()
+    "Hide line numbers and use variable-pitch font when Olivetti is enabled."
+    (if olivetti-mode
+        (progn
+          (variable-pitch-mode 1)
+          (setq-local display-line-numbers nil)
+          (setq-local line-spacing 0.2))
+      (variable-pitch-mode -1)
+      (setq-local display-line-numbers display-line-numbers-type)))
+
+  (add-hook 'olivetti-mode-hook #'my/olivetti-setup))
+#+end_src
+
+* Highlighting with org-remark
+
+#+begin_src emacs-lisp
+(use-package! org-remark
+  :config
+  (org-remark-global-tracking-mode +1)
+
+  ;; Nice colored highlighters (like real marker pens)
+  (org-remark-create "yellow"
+    :face '(:background "#fff176" :foreground "#212121"))
+  (org-remark-create "green"
+    :face '(:background "#a5d6a7" :foreground "#1b5e20"))
+  (org-remark-create "pink"
+    :face '(:background "#f8bbd0" :foreground "#880e4f"))
+  (org-remark-create "blue"
+    :face '(:background "#81d4fa" :foreground "#01579b")))
+
+;; Keybindings for org-remark - using "r" for remark (avoids conflict with help)
+(after! org-remark
+  (map! :map org-mode-map
+        :localleader
+        "r m" #'org-remark-mark      ; Highlight selected text
+        "r o" #'org-remark-open      ; Open/edit note on highlight
+        "r d" #'org-remark-delete    ; Delete highlight
+        "r t" #'org-remark-toggle))  ; Toggle all highlights on/off
+#+end_src
+
+* Custom Keybinds
+
+#+begin_src emacs-lisp
+;; Olivetti toggle
+(map! :leader
+      :desc "Toggle Olivetti mode" "z o" #'olivetti-mode)
+#+end_src
+
+* Custom Configuration
+
+#+begin_src emacs-lisp
+;; Add any extra personal settings here
+#+end_src
