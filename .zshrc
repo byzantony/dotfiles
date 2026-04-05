@@ -9,6 +9,12 @@ PROMPT='%F{green}%n%f@%F{blue}%m%f %F{yellow}%~%f %# '
 # Source/Load aliases
 source "$HOME/.config/zsh/.zsh/.aliases.zsh"
 
+# Yubikey SSH authentication prompt
+unset SSH_ASKPASS
+export SSH_ASKPASS_REQUIRE=never
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh"
+export GPG_TTY="$(tty)"
+
 # main zsh settings. env in ~/.zprofile
 # read second
 
@@ -89,5 +95,7 @@ echo -e "${NEWLINE}\x1b[38;5;137m\x1b[48;5;0m it's$(print -P '%D{%_I:%M%P}\n') \
 # requires zsh-syntax-highlighting package
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+export EDITOR=nvim
+export PATH="$HOME/.config/emacs/bin:$PATH"
 export CM_LAUNCHER=rofi
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

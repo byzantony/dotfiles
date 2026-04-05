@@ -1,0 +1,4 @@
+urls-source "freshrss"
+freshrss-url "http://192.168.1.218:82/api/greader.php"
+freshrss-login "cryptony"
+freshrss-password "WR4r2bfH46fXqxM"
