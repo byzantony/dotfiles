@@ -45,7 +45,7 @@ alias empire2='ssh root@empire.trex-scala.ts.net' # Tailscale SSH login custom D
 alias empire3='ssh root@empire.local' # Local SSH without Tailscale
 alias empiremedia='root@100.103.69.59/mnt/user/media' # Tailscale location of media on cache drive
 alias empiredata='root@100.103.69.59/mnt/user/data' # Tailscale location of data on cache drive
-alias pilgrim='mosh root@shinjuru-vps.trex-scala.ts.net' # Shinjiru VPS login on Tailnet
+alias pilgrim='mosh --ssh="ssh -p 20203" root@shinjuru-vps.trex-scala.ts.net' # Shinjiru VPS login on Tailnet
 
 ### NETWORKING ###
 alias flushdns='sudo killall -HUP mDNSResponder'
