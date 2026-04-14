@@ -27,32 +27,6 @@
 
 (set-face-background 'fringe (face-attribute 'default :background))
 
-;; Org styling
-(setq
- org-auto-align-tags nil
- org-tags-column 0
- org-catch-invisible-edits 'show-and-error
- org-special-ctrl-a/e t
- org-insert-heading-respect-content t
- org-hide-emphasis-markers t
- org-pretty-entities t
- org-agenda-tags-column 0
- org-ellipsis " ")
-
-(global-org-modern-mode)
-
-(custom-theme-set-faces!
- 'doom-old-hope
- '(org-level-8 :inherit outline-3 :height 1.0)
- '(org-level-7 :inherit outline-3 :height 1.0)
- '(org-level-6 :inherit outline-3 :height 1.1)
- '(org-level-5 :inherit outline-3 :height 1.2)
- '(org-level-4 :inherit outline-3 :height 1.3)
- '(org-level-3 :inherit outline-3 :height 1.4)
- '(org-level-2 :inherit outline-2 :height 1.5)
- '(org-level-1 :inherit outline-1 :height 1.6)
- '(org-document-title :height 1.8 :bold t :underline nil))
-
 (map! :leader
       :desc "Toggle Olivetti mode" "z o" #'olivetti-mode
       :desc "Comment line"         "-"   #'comment-line)
@@ -107,6 +81,61 @@
 (after! org
   (setq org-startup-folded 'overview   ; or 'fold
         org-hide-block-startup t))
+
+;; --- org-caldav configuration ---
+
+(use-package org-caldav
+  :ensure t
+  :config
+  (setq org-caldav-url "https://empire.trex-scala.ts.net:5232/cryptony"
+        org-caldav-delete-org-entries 'always
+        org-caldav-delete-calendar-entries 'always
+        org-caldav-sync-changes-to-org 'all)
+
+  (setq org-caldav-calendars
+        '((:calendar-id "business"
+           :files ("~/Documents/org/cal/business.org")
+           :inbox "~/Documents/org/cal/inbox-business.org")
+          (:calendar-id "liturgical"
+           :files ("~/Documents/org/cal/liturgical.org")
+           :inbox "~/Documents/org/cal/inbox-liturgical.org")
+          (:calendar-id "general"
+           :files ("~/Documents/org/cal/general.org")
+           :inbox "~/Documents/org/cal/inbox-general.org")
+          (:calendar-id "content"
+           :files ("~/Documents/org/cal/content.org")
+           :inbox "~/Documents/org/cal/inbox-content.org")))
+
+  ;; sync on a timer (every 15 min) so you don't have to think about it
+  (run-with-timer 300 900 #'org-caldav-sync))
+
+(setq url-gw-unparsed-authority nil)
+
+;; tell Emacs to accept your certs
+(setq gnutls-verify-error nil)
+
+;; --- agenda sees all calendar files ---
+
+(setq org-agenda-files '("~/Documents/org/cal/"))
+
+;; --- capture templates for quick event creation ---
+
+(setq org-capture-templates
+      (append org-capture-templates
+              '(("b" "Business event" entry
+                 (file "~/Documents/org/cal/business.org")
+                 "* %?\n  %^T\n")
+                ("l" "Liturgical event" entry
+                 (file "~/Documents/org/cal/liturgical.org")
+                 "* %?\n  %^T\n")
+                ("d" "Caldo event" entry
+                 (file "~/Documents/org/cal/general.org")
+                 "* %?\n  %^T\n")
+                ("c" "Content event" entry
+                 (file "~/Documents/org/cal/content.org")
+                 "* %?\n  %^T\n"))))
+(after! calfw
+  (setq cfw:org-agenda-schedule-args '(:timestamp)))
 
 (use-package! org-auto-tangle
   :defer t
