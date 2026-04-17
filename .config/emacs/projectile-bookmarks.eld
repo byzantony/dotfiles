@@ -1,0 +1,1 @@
+("~/Documents/writing/book/" "~/Documents/writing/articles/")

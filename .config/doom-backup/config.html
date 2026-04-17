@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-04-05 Sun 22:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Doom Emacs Literate Config</title>
+<meta name="author" content="Anthony" />
+<meta name="description" content="My personal literate Doom Emacs configuration" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'JavaScript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Doom Emacs Literate Config</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgaab6924">1. Introduction</a></li>
+<li><a href="#orgb4e79ce">2. Personal Information</a></li>
+<li><a href="#org93f1ca2">3. Appearance</a>
+<ul>
+<li><a href="#org40a029d">3.1. Fonts</a></li>
+<li><a href="#org1aac3e7">3.2. Theme &amp; Line Numbers</a></li>
+</ul>
+</li>
+<li><a href="#org0f004eb">4. Keybindings</a>
+<ul>
+<li><a href="#org83d678d">4.1. Global</a></li>
+<li><a href="#org908daa9">4.2. Org Mode</a></li>
+<li><a href="#orgadb9c98">4.3. Org-Remark</a></li>
+</ul>
+</li>
+<li><a href="#orgef1e294">5. Org Mode</a>
+<ul>
+<li><a href="#org1a186fc">5.1. Core Settings</a></li>
+<li><a href="#orgf8c64b2">5.2. Agenda</a></li>
+</ul>
+</li>
+<li><a href="#orgcea798c">6. Org Roam</a></li>
+<li><a href="#orgdedafd7">7. Olivetti Mode</a></li>
+<li><a href="#orgca7c883">8. Highlighting (org-remark)</a></li>
+<li><a href="#org604fd8c">9. Citations (Zotero + Citar + Turabian)</a>
+<ul>
+<li><a href="#org44a9a3a">9.1. Citar</a></li>
+<li><a href="#orga56c05f">9.2. Org-Cite</a></li>
+<li><a href="#org39a0699">9.3. Disable Org-Roam Citation Interception</a></li>
+<li><a href="#org4e23477">9.4. Per-File Header</a></li>
+<li><a href="#org86f5535">9.5. Usage</a></li>
+</ul>
+</li>
+<li><a href="#org0b8c7b8">10. Document Export</a>
+<ul>
+<li><a href="#org5fd34ef">10.1. PDF Compile Chain</a></li>
+<li><a href="#orgf91606a">10.2. Auto-Export PDF on Save</a></li>
+<li><a href="#orge577ecb">10.3. Open PDF in Zathura</a></li>
+<li><a href="#orgea151fd">10.4. HTML Preview</a></li>
+<li><a href="#orgcb46ecf">10.5. Book Layout (6×9 Print PDF)</a></li>
+</ul>
+</li>
+<li><a href="#org1c07481">11. Miscellaneous</a>
+<ul>
+<li><a href="#org0ae05f7">11.1. Jabber / XMPP (Snikket)</a></li>
+</ul>
+</li>
+<li><a href="#org67cf561">12. Future / TODO</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaab6924" class="outline-2">
+<h2 id="orgaab6924"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This is my literate Doom Emacs configuration. All code blocks below are
+automatically tangled when you run <code>doom sync</code>.
+</p>
+
+<p>
+After making changes, run <code>doom sync</code> in the terminal and restart Emacs.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb4e79ce" class="outline-2">
+<h2 id="orgb4e79ce"><span class="section-number-2">2.</span> Personal Information</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">user-full-name</span> <span style="color: #b4916d;">"Anthony"</span>
+      <span style="color: #bbc2cf;">user-mail-address</span> <span style="color: #b4916d;">"reversionist@pm.me"</span>)
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org93f1ca2" class="outline-2">
+<h2 id="org93f1ca2"><span class="section-number-2">3.</span> Appearance</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org40a029d" class="outline-3">
+<h3 id="org40a029d"><span class="section-number-3">3.1.</span> Fonts</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">doom-font</span> (<span style="color: #bbc2cf;">font-spec</span> <span style="color: #DFDFDF; font-weight: bold;">:family</span> <span style="color: #b4916d;">"JetBrainsMono Nerd Font"</span> <span style="color: #DFDFDF; font-weight: bold;">:size</span> 15 <span style="color: #DFDFDF; font-weight: bold;">:weight</span> <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">semi-light</span>)
+      <span style="color: #bbc2cf;">doom-variable-pitch-font</span> (<span style="color: #bbc2cf;">font-spec</span> <span style="color: #DFDFDF; font-weight: bold;">:family</span> <span style="color: #b4916d;">"Crimson Pro"</span> <span style="color: #DFDFDF; font-weight: bold;">:size</span> 24))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1aac3e7" class="outline-3">
+<h3 id="org1aac3e7"><span class="section-number-3">3.2.</span> Theme &amp; Line Numbers</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">doom-theme</span> <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">doom-homage-black</span>)
+(<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">display-line-numbers-type</span> t)
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org0f004eb" class="outline-2">
+<h2 id="org0f004eb"><span class="section-number-2">4.</span> Keybindings</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org83d678d" class="outline-3">
+<h3 id="org83d678d"><span class="section-number-3">4.1.</span> Global</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">map!</span> <span style="color: #DFDFDF; font-weight: bold;">:leader</span>
+      <span style="color: #DFDFDF; font-weight: bold;">:desc</span> <span style="color: #b4916d;">"Toggle Olivetti mode"</span> <span style="color: #b4916d;">"z o"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">olivetti-mode</span>
+      <span style="color: #DFDFDF; font-weight: bold;">:desc</span> <span style="color: #b4916d;">"Comment line"</span>         <span style="color: #b4916d;">"-"</span>   <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">comment-line</span>)
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org908daa9" class="outline-3">
+<h3 id="org908daa9"><span class="section-number-3">4.2.</span> Org Mode</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> org
+  (<span style="color: #DFDFDF; font-weight: bold;">map!</span> <span style="color: #DFDFDF; font-weight: bold;">:leader</span>
+        <span style="color: #DFDFDF; font-weight: bold;">:desc</span> <span style="color: #b4916d;">"Org agenda dispatcher"</span> <span style="color: #b4916d;">"o a"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">org-agenda</span>
+        <span style="color: #DFDFDF; font-weight: bold;">:desc</span> <span style="color: #b4916d;">"Org TODO list"</span>         <span style="color: #b4916d;">"o t"</span> (<span style="color: #DFDFDF; font-weight: bold;">lambda</span> () (<span style="color: #DFDFDF; font-weight: bold;">interactive</span>) (<span style="color: #bbc2cf;">org-agenda</span> nil <span style="color: #b4916d;">"t"</span>)))
+  (<span style="color: #DFDFDF; font-weight: bold;">map!</span> <span style="color: #DFDFDF; font-weight: bold;">:map</span> <span style="color: #bbc2cf;">org-mode-map</span>
+        <span style="color: #DFDFDF; font-weight: bold;">:localleader</span>
+        <span style="color: #DFDFDF; font-weight: bold;">:desc</span> <span style="color: #b4916d;">"Open PDF preview"</span>    <span style="color: #b4916d;">"v"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">my/org-open-pdf-preview</span>
+        <span style="color: #DFDFDF; font-weight: bold;">:desc</span> <span style="color: #b4916d;">"Toggle HTML preview"</span> <span style="color: #b4916d;">"h"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">org-preview-html-mode</span>))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgadb9c98" class="outline-3">
+<h3 id="orgadb9c98"><span class="section-number-3">4.3.</span> Org-Remark</h3>
+<div class="outline-text-3" id="text-4-3">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> org-remark
+  (<span style="color: #DFDFDF; font-weight: bold;">map!</span> <span style="color: #DFDFDF; font-weight: bold;">:map</span> <span style="color: #bbc2cf;">org-mode-map</span>
+        <span style="color: #DFDFDF; font-weight: bold;">:localleader</span>
+        <span style="color: #b4916d;">"r m"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">org-remark-mark</span>
+        <span style="color: #b4916d;">"r o"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">org-remark-open</span>
+        <span style="color: #b4916d;">"r d"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">org-remark-delete</span>
+        <span style="color: #b4916d;">"r t"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">org-remark-toggle</span>))
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgef1e294" class="outline-2">
+<h2 id="orgef1e294"><span class="section-number-2">5.</span> Org Mode</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org1a186fc" class="outline-3">
+<h3 id="org1a186fc"><span class="section-number-3">5.1.</span> Core Settings</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-directory</span> <span style="color: #b4916d;">"~/Documents/org/"</span>)
+
+(<span style="color: #DFDFDF; font-weight: bold;">after!</span> org
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-log-into-drawer</span> t)
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> org-fontify-whole-comment-block t)
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-footnote-auto-adjust</span> t))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf8c64b2" class="outline-3">
+<h3 id="orgf8c64b2"><span class="section-number-3">5.2.</span> Agenda</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> org
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-agenda-files</span>
+        (<span style="color: #bbc2cf;">directory-files-recursively</span> <span style="color: #bbc2cf;">org-directory</span> <span style="color: #b4916d;">"\\.org$"</span>))
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-agenda-window-setup</span> <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">current-window</span>))
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcea798c" class="outline-2">
+<h2 id="orgcea798c"><span class="section-number-2">6.</span> Org Roam</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> org-roam
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-roam-directory</span> <span style="color: #b4916d;">"~/Documents/org/roam/"</span>)
+  (<span style="color: #bbc2cf;">org-roam-db-autosync-mode</span>))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdedafd7" class="outline-2">
+<h2 id="orgdedafd7"><span class="section-number-2">7.</span> Olivetti Mode</h2>
+<div class="outline-text-2" id="text-7">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> olivetti
+  (<span style="color: #DFDFDF; font-weight: bold;">defun</span> <span style="color: #DFDFDF; font-weight: bold;">my/olivetti-setup</span> ()
+    <span style="color: #81a155; font-style: italic;">"Hide line numbers and use variable-pitch font when Olivetti is enabled."</span>
+    (<span style="color: #DFDFDF; font-weight: bold;">if</span> olivetti-mode
+        (<span style="color: #DFDFDF; font-weight: bold;">progn</span>
+          (<span style="color: #bbc2cf;">variable-pitch-mode</span> 1)
+          (<span style="color: #DFDFDF; font-weight: bold;">setq-local</span> <span style="color: #bbc2cf;">display-line-numbers</span> nil)
+          (<span style="color: #DFDFDF; font-weight: bold;">setq-local</span> <span style="color: #bbc2cf;">line-spacing</span> 0.2))
+      (<span style="color: #bbc2cf;">variable-pitch-mode</span> -1)
+      (<span style="color: #DFDFDF; font-weight: bold;">setq-local</span> <span style="color: #bbc2cf;">display-line-numbers</span> <span style="color: #bbc2cf;">display-line-numbers-type</span>)))
+
+  (<span style="color: #bbc2cf;">add-hook</span> <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">olivetti-mode-hook</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">my/olivetti-setup</span>))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgca7c883" class="outline-2">
+<h2 id="orgca7c883"><span class="section-number-2">8.</span> Highlighting (org-remark)</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">use-package!</span> org-remark
+  <span style="color: #DFDFDF; font-weight: bold;">:config</span>
+  (<span style="color: #bbc2cf;">org-remark-global-tracking-mode</span> +1)
+  (<span style="color: #DFDFDF; font-weight: bold;">org-remark-create</span> <span style="color: #b4916d;">"yellow"</span>
+    <span style="color: #DFDFDF; font-weight: bold;">:face</span> <span style="color: #bbc2cf;">'</span>(<span style="color: #DFDFDF; font-weight: bold;">:background</span> <span style="color: #b4916d;">"#fff176"</span> <span style="color: #DFDFDF; font-weight: bold;">:foreground</span> <span style="color: #b4916d;">"#212121"</span>))
+  (<span style="color: #DFDFDF; font-weight: bold;">org-remark-create</span> <span style="color: #b4916d;">"green"</span>
+    <span style="color: #DFDFDF; font-weight: bold;">:face</span> <span style="color: #bbc2cf;">'</span>(<span style="color: #DFDFDF; font-weight: bold;">:background</span> <span style="color: #b4916d;">"#a5d6a7"</span> <span style="color: #DFDFDF; font-weight: bold;">:foreground</span> <span style="color: #b4916d;">"#1b5e20"</span>))
+  (<span style="color: #DFDFDF; font-weight: bold;">org-remark-create</span> <span style="color: #b4916d;">"pink"</span>
+    <span style="color: #DFDFDF; font-weight: bold;">:face</span> <span style="color: #bbc2cf;">'</span>(<span style="color: #DFDFDF; font-weight: bold;">:background</span> <span style="color: #b4916d;">"#f8bbd0"</span> <span style="color: #DFDFDF; font-weight: bold;">:foreground</span> <span style="color: #b4916d;">"#880e4f"</span>))
+  (<span style="color: #DFDFDF; font-weight: bold;">org-remark-create</span> <span style="color: #b4916d;">"blue"</span>
+    <span style="color: #DFDFDF; font-weight: bold;">:face</span> <span style="color: #bbc2cf;">'</span>(<span style="color: #DFDFDF; font-weight: bold;">:background</span> <span style="color: #b4916d;">"#81d4fa"</span> <span style="color: #DFDFDF; font-weight: bold;">:foreground</span> <span style="color: #b4916d;">"#01579b"</span>)))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org604fd8c" class="outline-2">
+<h2 id="org604fd8c"><span class="section-number-2">9.</span> Citations (Zotero + Citar + Turabian)</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+This setup provides Turabian/Chicago Notes-Bibliography style footnotes:
+</p>
+<ul class="org-ul">
+<li>First reference → full citation in footnote</li>
+<li>Subsequent references → shortened form (Surname, Short Title, page)</li>
+</ul>
+
+<p>
+Uses <code>org-cite</code> with Citar for searchable insertion. Org-roam citation
+interception is disabled so citations export correctly via biblatex.
+</p>
+</div>
+<div id="outline-container-org44a9a3a" class="outline-3">
+<h3 id="org44a9a3a"><span class="section-number-3">9.1.</span> Citar</h3>
+<div class="outline-text-3" id="text-9-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> citar
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> citar-bibliography <span style="color: #bbc2cf;">'</span>(<span style="color: #b4916d;">"~/Documents/org/references.bib"</span>)
+        citar-library-paths <span style="color: #bbc2cf;">'</span>(<span style="color: #b4916d;">"/mnt/data/library/pdfs"</span>
+                              <span style="color: #b4916d;">"/mnt/data/library/journal articles"</span>)
+        citar-open-entry-in-zotero t))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga56c05f" class="outline-3">
+<h3 id="orga56c05f"><span class="section-number-3">9.2.</span> Org-Cite</h3>
+<div class="outline-text-3" id="text-9-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> oc
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-cite-global-bibliography</span> <span style="color: #bbc2cf;">'</span>(<span style="color: #b4916d;">"~/Documents/org/references.bib"</span>))
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-cite-insert-processor</span>   <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">citar</span>
+        <span style="color: #bbc2cf;">org-cite-follow-processor</span>   <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">citar</span>
+        <span style="color: #bbc2cf;">org-cite-activate-processor</span> <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">citar</span>)
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-cite-export-processors</span>
+        <span style="color: #bbc2cf;">'</span>((latex biblatex)
+          (t     csl))))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org39a0699" class="outline-3">
+<h3 id="org39a0699"><span class="section-number-3">9.3.</span> Disable Org-Roam Citation Interception</h3>
+<div class="outline-text-3" id="text-9-3">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> citar-org-roam
+  (<span style="color: #bbc2cf;">citar-org-roam-mode</span> -1))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4e23477" class="outline-3">
+<h3 id="org4e23477"><span class="section-number-3">9.4.</span> Per-File Header</h3>
+<div class="outline-text-3" id="text-9-4">
+<p>
+Add these lines at the top of any Org file that needs citations:
+</p>
+
+<pre class="example" id="org12782c5">
+#+bibliography: ~/Documents/org/references.bib
+#+cite_export: biblatex
+#+latex_header: \usepackage[notes,backend=biber]{biblatex-chicago}
+</pre>
+</div>
+</div>
+<div id="outline-container-org86f5535" class="outline-3">
+<h3 id="org86f5535"><span class="section-number-3">9.5.</span> Usage</h3>
+<div class="outline-text-3" id="text-9-5">
+<ul class="org-ul">
+<li>Insert citation: <code>SPC m @</code> (works inside footnotes too)</li>
+<li>Create footnote: <code>C-c C-x f</code></li>
+<li>Open attached PDF: select reference in Citar → choose PDF action</li>
+<li>Export to PDF: <code>C-c C-e l p</code></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org0b8c7b8" class="outline-2">
+<h2 id="org0b8c7b8"><span class="section-number-2">10.</span> Document Export</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-org5fd34ef" class="outline-3">
+<h3 id="org5fd34ef"><span class="section-number-3">10.1.</span> PDF Compile Chain</h3>
+<div class="outline-text-3" id="text-10-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> org
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-export-in-background</span> t)
+  (<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">org-latex-pdf-process</span>
+        <span style="color: #bbc2cf;">'</span>(<span style="color: #b4916d;">"pdflatex -interaction nonstopmode -output-directory %o %f"</span>
+          <span style="color: #b4916d;">"biber %b"</span>
+          <span style="color: #b4916d;">"pdflatex -interaction nonstopmode -output-directory %o %f"</span>
+          <span style="color: #b4916d;">"pdflatex -interaction nonstopmode -output-directory %o %f"</span>)))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf91606a" class="outline-3">
+<h3 id="orgf91606a"><span class="section-number-3">10.2.</span> Auto-Export PDF on Save</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+Exports to PDF on every save. Skips <code>config.org</code> to avoid tangling issues.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> org
+  (<span style="color: #DFDFDF; font-weight: bold;">defun</span> <span style="color: #DFDFDF; font-weight: bold;">my/org-auto-export-pdf</span> ()
+    <span style="color: #81a155; font-style: italic;">"Export current org file to PDF on save, skipping config.org."</span>
+    (<span style="color: #DFDFDF; font-weight: bold;">when</span> (<span style="color: #DFDFDF; font-weight: bold;">and</span> (<span style="color: #bbc2cf;">eq</span> <span style="color: #bbc2cf;">major-mode</span> <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">org-mode</span>)
+               (<span style="color: #bbc2cf;">buffer-file-name</span>)
+               (<span style="color: #bbc2cf;">not</span> (<span style="color: #DFDFDF; font-weight: bold;">string-match-p</span> <span style="color: #b4916d;">"config\\.org$"</span> (<span style="color: #bbc2cf;">buffer-file-name</span>))))
+      (<span style="color: #bbc2cf;">org-latex-export-to-pdf</span> t)))
+
+  (<span style="color: #bbc2cf;">add-hook</span> <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">after-save-hook</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">my/org-auto-export-pdf</span>))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge577ecb" class="outline-3">
+<h3 id="orge577ecb"><span class="section-number-3">10.3.</span> Open PDF in Zathura</h3>
+<div class="outline-text-3" id="text-10-3">
+<p>
+Opens the compiled PDF alongside Emacs. Zathura auto-refreshes on each
+recompile. Bound to <code>SPC m v</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">defun</span> <span style="color: #DFDFDF; font-weight: bold;">my/org-open-pdf-preview</span> ()
+  <span style="color: #81a155; font-style: italic;">"Open the PDF export of the current org file in Zathura."</span>
+  (<span style="color: #DFDFDF; font-weight: bold;">interactive</span>)
+  (<span style="color: #DFDFDF; font-weight: bold;">let</span> ((pdf-file (<span style="color: #bbc2cf;">concat</span> (<span style="color: #bbc2cf;">file-name-sans-extension</span> (<span style="color: #bbc2cf;">buffer-file-name</span>)) <span style="color: #b4916d;">".pdf"</span>)))
+    (<span style="color: #DFDFDF; font-weight: bold;">unless</span> (<span style="color: #bbc2cf;">file-exists-p</span> pdf-file)
+      (<span style="color: #bbc2cf;">org-latex-export-to-pdf</span>))
+    (<span style="color: #bbc2cf;">start-process</span> <span style="color: #b4916d;">"zathura"</span> nil <span style="color: #b4916d;">"zathura"</span> pdf-file)))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgea151fd" class="outline-3">
+<h3 id="orgea151fd"><span class="section-number-3">10.4.</span> HTML Preview</h3>
+<div class="outline-text-3" id="text-10-4">
+<p>
+Live HTML preview in a split Emacs window via xwidget. Refreshes on save.
+Useful for reading standard org notes — does not render biblatex citations.
+Bound to <code>SPC m h</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">defun</span> <span style="color: #DFDFDF; font-weight: bold;">my/org-preview-html</span> ()
+  <span style="color: #81a155; font-style: italic;">"Export current org file to HTML and open in browser."</span>
+  (<span style="color: #DFDFDF; font-weight: bold;">interactive</span>)
+  (<span style="color: #DFDFDF; font-weight: bold;">let</span> ((html-file (<span style="color: #bbc2cf;">concat</span> (<span style="color: #bbc2cf;">file-name-sans-extension</span> (<span style="color: #bbc2cf;">buffer-file-name</span>)) <span style="color: #b4916d;">".html"</span>)))
+    (<span style="color: #bbc2cf;">org-html-export-to-html</span>)
+    (<span style="color: #bbc2cf;">browse-url</span> (<span style="color: #bbc2cf;">concat</span> <span style="color: #b4916d;">"file://"</span> html-file))))
+
+(<span style="color: #DFDFDF; font-weight: bold;">after!</span> org
+  (<span style="color: #DFDFDF; font-weight: bold;">map!</span> <span style="color: #DFDFDF; font-weight: bold;">:map</span> <span style="color: #bbc2cf;">org-mode-map</span>
+        <span style="color: #DFDFDF; font-weight: bold;">:localleader</span>
+        <span style="color: #DFDFDF; font-weight: bold;">:desc</span> <span style="color: #b4916d;">"Preview HTML in browser"</span> <span style="color: #b4916d;">"h"</span> <span style="color: #bbc2cf;">#'</span><span style="color: #bbc2cf;">my/org-preview-html</span>))
+</code></pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcb46ecf" class="outline-3">
+<h3 id="orgcb46ecf"><span class="section-number-3">10.5.</span> Book Layout (6×9 Print PDF)</h3>
+<div class="outline-text-3" id="text-10-5">
+<p>
+Custom LaTeX class for book-style PDF export. Use <code>#+latex_class: mybook</code>
+in the per-file header alongside the citation headers. Produces
+Turabian-compatible footnotes, EB Garamond font, Chicago chapter/section
+styling, and print-ready margins.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">after!</span> ox-latex
+  (<span style="color: #bbc2cf;">add-to-list</span> <span style="color: #bbc2cf;">'</span><span style="color: #bbc2cf;">org-latex-classes</span>
+    <span style="color: #bbc2cf;">'</span>(<span style="color: #b4916d;">"mybook"</span>
+      <span style="color: #b4916d;">"\\documentclass[11pt,twoside]{book}
+[NO-DEFAULT-PACKAGES]
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage{ebgaramond}
+\\usepackage[paperwidth=6in,paperheight=9in,
+             top=0.625in,bottom=0.625in,
+             inner=0.875in,outer=0.625in]{geometry}
+\\usepackage{microtype}
+\\usepackage{graphicx}
+\\usepackage{longtable}
+\\usepackage{wrapfig}
+\\usepackage{rotating}
+\\usepackage{ulem}
+\\usepackage{amsmath}
+\\usepackage{amssymb}
+\\usepackage{capt-of}
+\\usepackage{hyperref}
+\\usepackage{fancyhdr}
+\\usepackage{titlesec}
+% Chapter title: 'Chapter N' then title in small caps with top padding
+\\titleformat{\\chapter}[display]
+  {\\normalfont\\large\\centering}
+  {Chapter \\thechapter}
+  {1ex}
+  {\\Large\\scshape}
+\\titlespacing*{\\chapter}{0pt}{2.5in}{1.5em}
+% Section: no number, centered
+\\titleformat{\\section}[block]
+  {\\normalfont\\large\\centering}
+  {}
+  {0pt}
+  {}
+\\titlespacing*{\\section}{0pt}{1.5em}{0.75em}
+% Subsection: no number, centered, italic
+\\titleformat{\\subsection}[block]
+  {\\normalfont\\normalsize\\centering\\itshape}
+  {}
+  {0pt}
+  {}
+\\titlespacing*{\\subsection}{0pt}{1em}{0.5em}
+% Running header: chapter title centered, no rule
+\\pagestyle{fancy}
+\\fancyhf{}
+\\renewcommand{\\chaptermark}[1]{\\markboth{#1}{}}
+\\fancyhead[C]{\\small\\itshape\\leftmark}
+\\fancyfoot[C]{\\thepage}
+\\renewcommand{\\headrulewidth}{0pt}
+\\fancypagestyle{plain}{%
+  \\fancyhf{}%
+  \\fancyfoot[C]{\\thepage}%
+  \\renewcommand{\\headrulewidth}{0pt}%
+}
+% Footnote padding
+\\setlength{\\skip\\footins}{1.5em}
+\\addtolength{\\footnotesep}{4pt}
+% No section numbers
+\\setcounter{secnumdepth}{0}
+[EXTRA]"</span>
+      (<span style="color: #b4916d;">"\\chapter{%s}"</span>       . <span style="color: #b4916d;">"\\chapter*{%s}"</span>)
+      (<span style="color: #b4916d;">"\\section{%s}"</span>       . <span style="color: #b4916d;">"\\section*{%s}"</span>)
+      (<span style="color: #b4916d;">"\\subsection{%s}"</span>    . <span style="color: #b4916d;">"\\subsection*{%s}"</span>)
+      (<span style="color: #b4916d;">"\\subsubsection{%s}"</span> . <span style="color: #b4916d;">"\\subsubsection*{%s}"</span>))))
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1c07481" class="outline-2">
+<h2 id="org1c07481"><span class="section-number-2">11.</span> Miscellaneous</h2>
+<div class="outline-text-2" id="text-11">
+</div>
+<div id="outline-container-org0ae05f7" class="outline-3">
+<h3 id="org0ae05f7"><span class="section-number-3">11.1.</span> Jabber / XMPP (Snikket)</h3>
+<div class="outline-text-3" id="text-11-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><code>(<span style="color: #DFDFDF; font-weight: bold;">setq</span> <span style="color: #bbc2cf;">jabber-account-list</span>
+      <span style="color: #bbc2cf;">'</span>((<span style="color: #b4916d;">"anthony@chat.permanet.xyz"</span>
+         (<span style="color: #DFDFDF; font-weight: bold;">:network-server</span> <span style="color: #b4916d;">"permanet.xyz"</span>)
+         (<span style="color: #DFDFDF; font-weight: bold;">:connection-type</span> <span style="color: #DFDFDF; font-weight: bold;">:starttls</span>))))
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org67cf561" class="outline-2">
+<h2 id="org67cf561"><span class="section-number-2">12.</span> Future / TODO</h2>
+<div class="outline-text-2" id="text-12">
+<ul class="org-ul">
+<li>TODO Try opening PDFs from the mounted drives</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Anthony</p>
+<p class="date">Created: 2026-04-05 Sun 22:55</p>
+</div>
+</body>
+</html>

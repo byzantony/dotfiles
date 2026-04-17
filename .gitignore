@@ -1,0 +1,38 @@
+.# Prevent the bare repo from tracking itself
+.dotfiles
+
+# Emacs temporary / generated files
+*~
+\#*\#
+.#*
+*.elc
+auto-save-list/
+tramp/
+.server/
+
+# Package management directories (do NOT track installed packages)
+.elpa/
+.straight/
+.cask/
+eln-cache/
+package-quickstart.el
+
+# Session / desktop files
+.emacs.desktop
+.emacs.desktop.lock
+
+# Org-mode and other temporary files
+.org-id-locations
+*_archive
+
+# Eshell (machine-specific)
+eshell/history
+eshell/lastdir
+
+# Local customizations (highly recommended to keep untracked)
+custom.el
+
+# General OS / editor junk
+.DS_Store
+Thumbs.dbdotfiles
+.dotfiles

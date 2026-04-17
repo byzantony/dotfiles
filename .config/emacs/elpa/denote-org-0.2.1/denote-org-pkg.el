@@ -1,0 +1,2 @@
+;; Generated package description from denote-org.el  -*- mode: lisp-data; no-byte-compile: t -*-
+(define-package "denote-org" "0.2.1" "Denote extensions for Org mode" '((emacs "28.1") (denote "4.0.0")) :commit "36f24f0f0f472e4cb50025ed62a1b32351d7d294" :authors '(("Protesilaos Stavrou" . "info@protesilaos.com")) :maintainer '("Protesilaos Stavrou" . "info@protesilaos.com") :url "https://github.com/protesilaos/denote-org")
